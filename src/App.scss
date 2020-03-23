@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+  height: 100%;
+}
+.title {
+  height: 10%;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  h1 {
+    font-size: 1.5rem;
+  }
+  p {
+    color: #626567;
+    font-size: 0.9rem;
+  }
+}
+.divider {
+  width: 100%;
+  height: 0.1vh;
+  background-color: #d7dbdd;
+}
