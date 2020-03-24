@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.scss';
+import CountriesDropDown from '../Regions/Regions';
+import Table from '../Table/Table';
 
 function App() {
   return (
@@ -9,7 +11,10 @@ function App() {
         <p>Cost Calculator (All units per month)</p>
       </div>
       <div className="divider"></div>
-      <div className="chart"></div>
+      <div className="chart">
+        <CountriesDropDown />
+        <Table />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.drop {
+  margin-top: 1.5%;
+  border-color: #007bff;
+}
+#dropdown-item-button {
+  background-color: white;
+  color: black;
+  &:focus {
+    background-color: #cacfd2;
+    outline: none;
+  }
+}
