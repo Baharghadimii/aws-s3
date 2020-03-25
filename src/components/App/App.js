@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import CountriesDropDown from '../Regions/Regions';
 import Table from '../Table/Table';
 
 function App() {
+  const [state, setState] = useState({
+    region: ''
+  })
   return (
     <div className="App">
       <div className="title">
@@ -12,8 +15,8 @@ function App() {
       </div>
       <div className="divider"></div>
       <div className="chart">
-        <CountriesDropDown />
-        <Table />
+        <CountriesDropDown onChange={(value => setState(value))} />
+        <Table region={state.region} />
       </div>
     </div>
   );

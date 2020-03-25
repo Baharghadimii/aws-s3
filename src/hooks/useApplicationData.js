@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer } from 'react';
 import reducer from '../reducers/application';
 import {
   SET_DATA_TRANSFER_COST,

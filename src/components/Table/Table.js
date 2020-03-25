@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Table.scss';
 import { Table } from 'react-bootstrap';
 import Unit from '../Unit/Unit';
 import useApplicationData from '../../hooks/useApplicationData';
 
-export default function PriceList() {
-
-  const [state, setState] = useState({
-    dataSize: 100,
-    postPutRequest: 10,
-    getRequest: 100,
-    dataTransfer: 100
-  });
-
+export default function PriceList(props) {
   const {
     prices,
     setDataTransferCost,
@@ -20,29 +12,19 @@ export default function PriceList() {
     setPostRequestCost,
     setDataSizeCost
   } = useApplicationData();
-  const changeDataTransferPrice = (value) => {
-    setState({ ...state, dataTransfer: value });
-    setDataTransferCost(value);
-  }
-  const changeGetRequestCost = (value) => {
-    setState({ ...state, getRequest: value });
-    setGetRequestCost(value);
-  }
-  const changePostRequestCost = (value) => {
-    setState({ ...state, postPutRequest: value });
-    setPostRequestCost(value);
-  }
-  const changeDataSizeCost = (value) => {
-    setState({ ...state, dataSize: value });
-    setDataSizeCost(value);
-  }
-  // const setDataSizeCost = (cost) => {
-  //   setPrices({
-  //     ...prices,
-  //     standardDataSizeCost: cost >= 1 ? ((cost * 30) - ((cost * 0.5) - 0.5)).toFixed(2) : 0.00,
-  //     IAdataSizeCost: (cost * 12.5).toFixed(2)
-  //   })
-  // }
+  const [total, setTotal] = useState({
+    totalStandard: (0).toFixed(2),
+    totalAI: (0).toFixed(2)
+  })
+  useEffect(() => {
+    setTotal({
+      totalStandard: (Number(prices.standardPostRequestCost) +
+        Number(prices.standardDataSizeCost) + Number(prices.standardGetRequestCost)).toFixed(2),
+      totalAI: (Number(prices.dataTransferCost) + Number(prices.IAdataSizeCost) +
+        Number(prices.IAGetRequestCost) + Number(prices.IAPostRequestCost)).toFixed(2)
+    })
+  }, [prices]);
+
   return (
     <Table id="table" responsive="sm" bordered>
       <thead>
@@ -56,7 +38,8 @@ export default function PriceList() {
       <tbody>
         <tr>
           <td id="title">Data Size in TB</td>
-          <td><Unit unitName={"TB"} onChange={changeDataSizeCost} /></td>
+          <td><Unit unitName={"TB"}
+            onChange={value => setDataSizeCost(value, props.region)} /></td>
           <td>$
           {prices.standardDataSizeCost}
           </td>
@@ -66,7 +49,7 @@ export default function PriceList() {
         </tr>
         <tr>
           <td id="title">No. of POST/PUT requests in Millions</td>
-          <td><Unit unitName={"Million"} onChange={changePostRequestCost} /></td>
+          <td><Unit unitName={"Million"} onChange={setPostRequestCost} /></td>
           <td>$
           {prices.standardPostRequestCost}
           </td>
@@ -76,7 +59,7 @@ export default function PriceList() {
         </tr>
         <tr>
           <td id="title">No. of GET requests in Millions</td>
-          <td><Unit unitName={"Million"} onChange={changeGetRequestCost} /></td>
+          <td><Unit unitName={"Million"} onChange={setGetRequestCost} /></td>
           <td>$
           {prices.standardGetRequestCost}
           </td>
@@ -86,7 +69,7 @@ export default function PriceList() {
         </tr>
         <tr>
           <td id="title">S3 IA Data transfer cost in GB</td>
-          <td><Unit unitName={"GB"} onChange={changeDataTransferPrice} /></td>
+          <td><Unit unitName={"GB"} onChange={setDataTransferCost} /></td>
           <td>$ 0.00</td>
           <td>$
           {prices.dataTransferCost}
@@ -94,9 +77,9 @@ export default function PriceList() {
         </tr>
         <tr id="total-row">
           <td id="title">Totals</td>
-          <td>Savings: $ 0.0</td>
-          <td>$ 0.0</td>
-          <td>$ 0.0</td>
+          <td>Savings: $ {(total.totalStandard - total.totalAI).toFixed(2)}</td>
+          <td>$ {total.totalStandard}</td>
+          <td>$ {total.totalAI}</td>
         </tr>
       </tbody>
     </Table>

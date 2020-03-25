@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './Regions.scss';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 
-export default function CountriesDropDown() {
+export default function CountriesDropDown(props) {
   const [title, setTitle] = useState('US East (N.Virginia) - us-east-1');
   const changeTitle = (value) => {
     if (value) {
       setTitle(value);
+      props.onChange(value);
     }
   }
   return (

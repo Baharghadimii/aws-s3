@@ -28,6 +28,10 @@ export default function reducer(prices, action) {
         standardDataSizeCost: action.cost >= 1 ? ((action.cost * 30) - ((action.cost * 0.5) - 0.5)).toFixed(2) : 0.00,
         IAdataSizeCost: (action.cost * 12.5).toFixed(2)
       }
+    default:
+      throw new Error(
+        `Tried to reduce with unsupported action type: ${action.type}`
+      );
   }
 
 }
