@@ -23,7 +23,6 @@ export default function reducer(prices, action) {
         standardPostRequestCost: (action.cost * 5).toFixed(2)
       }
     case SET_DATA_SIZE_COST:
-      console.log(action.region);
       return {
         ...prices,
         standardDataSizeCost: action.cost >= 1 ? ((action.cost * 30) - ((action.cost * 0.5) - 0.5)).toFixed(2) : 0.00,

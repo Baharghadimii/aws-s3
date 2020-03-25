@@ -7,7 +7,6 @@ export default function CountriesDropDown(props) {
   const changeTitle = (value) => {
     if (value) {
       setTitle(value);
-      props.onChange(value);
     }
   }
   return (

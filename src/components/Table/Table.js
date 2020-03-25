@@ -23,8 +23,7 @@ export default function PriceList(props) {
       totalAI: (Number(prices.dataTransferCost) + Number(prices.IAdataSizeCost) +
         Number(prices.IAGetRequestCost) + Number(prices.IAPostRequestCost)).toFixed(2)
     })
-  }, [prices, props.region]);
-
+  }, [prices]);
   return (
     <Table id="table" responsive="sm" bordered>
       <thead>
@@ -38,8 +37,9 @@ export default function PriceList(props) {
       <tbody>
         <tr>
           <td id="title">Data Size in TB</td>
-          <td><Unit unitName={"TB"}
-            onChange={value => setDataSizeCost(value, props.region)} /></td>
+          <td><Unit
+            unitName={"TB"}
+            onChange={setDataSizeCost} /></td>
           <td>$
           {prices.standardDataSizeCost}
           </td>
