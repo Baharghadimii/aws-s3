@@ -23,7 +23,7 @@ export default function PriceList(props) {
       totalAI: (Number(prices.dataTransferCost) + Number(prices.IAdataSizeCost) +
         Number(prices.IAGetRequestCost) + Number(prices.IAPostRequestCost)).toFixed(2)
     })
-  }, [prices]);
+  }, [prices, props.region]);
 
   return (
     <Table id="table" responsive="sm" bordered>

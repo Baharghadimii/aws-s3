@@ -4,9 +4,7 @@ import CountriesDropDown from '../Regions/Regions';
 import Table from '../Table/Table';
 
 function App() {
-  const [state, setState] = useState({
-    region: ''
-  })
+  const [region, setRegion] = useState('US East (N.Virginia) - us-east-1')
   return (
     <div className="App">
       <div className="title">
@@ -15,8 +13,8 @@ function App() {
       </div>
       <div className="divider"></div>
       <div className="chart">
-        <CountriesDropDown onChange={(value => setState(value))} />
-        <Table region={state.region} />
+        <CountriesDropDown onChange={(value => setRegion(value))} />
+        <Table region={region} />
       </div>
     </div>
   );

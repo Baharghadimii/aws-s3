@@ -27,8 +27,8 @@ export default function useApplicationData() {
   function setPostRequestCost(value) {
     return dispatch({ type: SET_POST_REQUEST_COST, cost: value })
   }
-  function setDataSizeCost(value) {
-    return dispatch({ type: SET_DATA_SIZE_COST, cost: value });
+  function setDataSizeCost(value, area) {
+    return dispatch({ type: SET_DATA_SIZE_COST, cost: value, region: area });
   }
   return {
     prices,
